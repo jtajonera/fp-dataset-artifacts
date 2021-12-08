@@ -58,6 +58,12 @@ def main():
         # so if we want to use a jsonl file for evaluation we need to get the "train" split
         # from the loaded dataset
         eval_split = 'train'
+    if args.dataset.endswith('.csv'):
+        dataset_id = None
+        print(dataset)
+        dataset = datasets.Dataset.from_csv(args.dataset).remove_columns('Unnamed: 0') 
+        # raise Exception()
+        eval_split = 'train'
     else:
         default_datasets = {'qa': ('squad',), 'nli': ('snli',)}
         dataset_id = tuple(args.dataset.split(':')) if args.dataset is not None else \
@@ -99,7 +105,10 @@ def main():
     train_dataset_featurized = None
     eval_dataset_featurized = None
     if training_args.do_train:
-        train_dataset = dataset['train']
+        if args.dataset.endswith('.csv'):
+            train_dataset = dataset
+        else:
+            train_dataset = dataset['train']
         if args.max_train_samples:
             train_dataset = train_dataset.select(range(args.max_train_samples))
         train_dataset_featurized = train_dataset.map(
