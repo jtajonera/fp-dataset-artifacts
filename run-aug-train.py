@@ -60,13 +60,17 @@ def main():
     
     train_dataset = dataset['train']
     eval_dataset = dataset[eval_split]
-
+    
+    train_batch_size = 8
+    if training_args.per_device_train_batch_size is not None:
+        train_batch_size = training_args.per_device_train_batch_size
+    
     training_args = textattack.TrainingArgs(
         num_epochs=3,
         num_clean_epochs=0,
         num_train_adv_examples=1000,
-        learning_rate=0.00001,
-        per_device_train_batch_size=8,
+        learning_rate=0.00005,
+        per_device_train_batch_size=train_batch_size,
         gradient_accumulation_steps=4,
         log_to_tb=True,
     )   
