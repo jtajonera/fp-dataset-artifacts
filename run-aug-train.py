@@ -69,7 +69,7 @@ def main():
         num_epochs=3,
         num_clean_epochs=0,
         num_train_adv_examples=1000,
-        learning_rate=0.00001,
+        learning_rate=0.00005,
         per_device_train_batch_size=train_batch_size,
         gradient_accumulation_steps=4,
         log_to_tb=True,
