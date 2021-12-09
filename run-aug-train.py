@@ -62,8 +62,8 @@ def main():
     eval_dataset = dataset[eval_split]
     
     train_batch_size = 8
-    if args.per_device_train_batch_size is not None:
-        train_batch_size = args.per_device_train_batch_size
+    if training_args.per_device_train_batch_size is not None:
+        train_batch_size = training_args.per_device_train_batch_size
     
     training_args = textattack.TrainingArgs(
         num_epochs=3,
