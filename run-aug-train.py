@@ -79,7 +79,7 @@ def main():
     # print(format_data_train)
     tData = textattack.datasets.Dataset(format_data_train, input_columns=("premise", "hypothesis"))
     eData = textattack.datasets.Dataset(format_data_eval, input_columns=("premise", "hypothesis"))
-    attack = textattack.attack_recipes.DeepWordBugGao2018.build(model_wrapper)
+    attack = textattack.attack_recipes.TextFoolerJin2019.build(model_wrapper)
 
     trainer = textattack.Trainer(
         model_wrapper,
